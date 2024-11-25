@@ -430,24 +430,7 @@ FN_INTERNAL int fnusb_open_subdevices(freenect_device *dev, int index)
 
 			if (desc.idProduct == PID_K4W_CAMERA || desc.bcdDevice != fn_le32(267))
 			{
-				freenect_device_flags requested_devices = ctx->enabled_subdevices;
-
-				// Not the 1414 kinect so remove the motor flag, this should preserve the audio flag if set
-				ctx->enabled_subdevices = (freenect_device_flags)(ctx->enabled_subdevices & ~FREENECT_DEVICE_MOTOR);
-
 				ctx->zero_plane_res = 334;
-				dev->device_does_motor_control_with_audio = 1;
-
-				// set the LED for non 1414 devices to keep the camera alive for some systems which get freezes
-				libusb_device * audio = fnusb_find_sibling_device(ctx, camera, devs, count, &fnusb_is_audio);
-				fnusb_keep_alive_led(ctx, audio);
-
-				// for newer devices we need to enable the audio device for motor control
-				// we only do this though if motor has been requested.
-				if ((requested_devices & FREENECT_DEVICE_MOTOR) && (requested_devices & FREENECT_DEVICE_AUDIO) == 0)
-				{
-					ctx->enabled_subdevices = (freenect_device_flags)(ctx->enabled_subdevices | FREENECT_DEVICE_AUDIO);
-				}
 			}
 			else
 			{

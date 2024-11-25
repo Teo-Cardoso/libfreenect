@@ -569,7 +569,7 @@ int freenect_init(freenect_context **ctx, freenect_usb_context *usb_ctx)
 
 int freenect_supported_subdevices(void)
 {
-    return FREENECT_DEVICE_MOTOR | FREENECT_DEVICE_CAMERA;
+    return FREENECT_DEVICE_CAMERA;
 }
 
 void freenect_select_subdevices(freenect_context *ctx, freenect_device_flags subdevs) {

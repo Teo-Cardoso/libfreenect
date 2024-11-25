@@ -1,23 +1,24 @@
 #!/usr/bin/env python
+import time
 import freenect
-import cv2
+#import cv2
 import frame_convert2
 
-cv2.namedWindow('Depth')
-cv2.namedWindow('Video')
+#cv2.namedWindow('Depth')
+#cv2.namedWindow('Video')
 print('Press ESC in window to stop')
 
 
 def get_depth():
-    return frame_convert2.pretty_depth_cv(freenect.sync_get_depth()[0])
+    return freenect.sync_get_depth()[0]
 
 
 def get_video():
-    return frame_convert2.video_cv(freenect.sync_get_video()[0])
+    return freenect.sync_get_video()[0]
 
 
 while 1:
-    cv2.imshow('Depth', get_depth())
-    cv2.imshow('Video', get_video())
-    if cv2.waitKey(10) == 27:
-        break
+    print(get_depth().shape)
+    print(get_video().shape)
+    time.sleep(1/30)
+    

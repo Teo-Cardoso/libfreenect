@@ -60,7 +60,6 @@ static int get_reply(fnusb_dev* dev) {
 	}
 	memcpy(&buffer, dump, sizeof(bootloader_status_code));
 	if(fn_le32(buffer.magic) != 0x0a6fe000) {
-		FN_ERROR("Error reading reply: invalid magic %08X\n",buffer.magic);
 		return -1;
 	}
 	if(fn_le32(buffer.tag) != dev->parent->audio_tag) {

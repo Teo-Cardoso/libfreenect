@@ -305,7 +305,7 @@ cpdef init():
     # to both but haven't wrapped the python API for selecting subdevices yet.
     # Also, we don't support audio in the python wrapper yet, so no sense claiming
     # the device.
-    freenect_select_subdevices(ctx, <freenect_device_flags> (FREENECT_DEVICE_MOTOR | FREENECT_DEVICE_CAMERA))
+    freenect_select_subdevices(ctx, <freenect_device_flags> (FREENECT_DEVICE_CAMERA))
     cdef CtxPtr ctx_out = CtxPtr.__new__(CtxPtr)
     ctx_out._ptr = ctx
     return ctx_out
